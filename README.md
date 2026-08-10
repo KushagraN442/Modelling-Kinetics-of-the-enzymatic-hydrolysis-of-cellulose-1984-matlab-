@@ -17,7 +17,7 @@ Enzyme and Microbial Technology, 7(7), 346-352.
 ## Files
 - `src/hydroeqs.m` — the ODE right-hand-side function
 - `src/maincode.m` — sets parameters/initial conditions, solves, plots
-- `analysis/ki2_sensitivity.m` — parameter sensitivity sweep example
+
 
 ## Status
 Core model validated. Process-optimization extension in progress.
