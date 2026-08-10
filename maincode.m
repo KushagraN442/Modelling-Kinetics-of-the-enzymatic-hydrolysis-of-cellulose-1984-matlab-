@@ -14,6 +14,7 @@ G02 = 0; % glucose initial conc
 G20 = G02; % Both glucose and cellulobiose have initial concentration of 0
 
 % Define a vector of parameters for further calculations
+V = [0.16, 0.16, 0.098, 0.022, 0.0036];
 
 p = [km1, km2, ki1, ki2, km3, km4, ki3, ki4, km5, ki5, k_in, V(1), V(2), V(3), V(4), V(5)];
 
