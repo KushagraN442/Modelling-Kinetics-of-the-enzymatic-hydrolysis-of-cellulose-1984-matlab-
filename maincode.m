@@ -30,9 +30,11 @@ for k = 1:length(ki2_values)
     ki2 = ki2_values(k); % Update the inhibitor constant for the current iteration
 p = [km1, km2, ki1, ki2, km3, km4, ki3, ki4, km5, ki5, k_in, V(1), V(2), V(3), V(4), V(5)];
 [t,y] = ode45(@(t,y) hydroeqs(t,y,p), tspan, y0)
-
 plot(t/60, y(:,3) + y(:,4))
+legends{end+1} = sprintf('K_i(2) = %.3f', ki2);
 end
+legend(legends);
+xlabel('time (h)'); ylabel('Glucose + Cellobiose (g/L)');
 %%
 % for only ki2=  .08
 %Sam = y(:,1); Scr = y(:,2); G2 = y(:,3); G = y(:,4);
