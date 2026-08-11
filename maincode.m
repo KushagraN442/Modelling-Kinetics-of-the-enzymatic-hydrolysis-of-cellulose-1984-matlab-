@@ -14,28 +14,32 @@ G02 = 0; % glucose initial conc
 G20 = G02; % Both glucose and cellulobiose have initial concentration of 0
 
 % Define a vector of parameters for further calculations
-V = [0.16, 0.16, 0.098, 0.022, 0.0036];
-
+ V = [0.16, 0.16, 0.098, 0.022, 0.0036];
 p = [km1, km2, ki1, ki2, km3, km4, ki3, ki4, km5, ki5, k_in, V(1), V(2), V(3), V(4), V(5)];
 
    V = [0.16, 0.16, 0.098, 0.022, 0.0036]; % maximum rates
-tmins = linspace(0,72*60,10000);
+tmins = linspace(0,72*60,10000); %not required, only for previous experimental purposes
 tspan = linspace(0,72*60,10000);
 
 % solution
 y0 = [Sam0; Scr0;G20;G0];
-
-ki2_values = [0.8, 0.2, 0.002, 0.0001];
+legends = {}
+km4_values = [0.8*32, 0.9*32, 32, 32*1.1, 32*1.2];
 hold on
-for k = 1:length(ki2_values)
-    ki2 = ki2_values(k); % Update the inhibitor constant for the current iteration
+%% KM4 SENSITIVITY GRAPH:
+
+for k = 1:length(km4_values)
+    km4 = km4_values(k); % Update the inhibitor constant for the current iteration
 p = [km1, km2, ki1, ki2, km3, km4, ki3, ki4, km5, ki5, k_in, V(1), V(2), V(3), V(4), V(5)];
 [t,y] = ode45(@(t,y) hydroeqs(t,y,p), tspan, y0)
+
 plot(t/60, y(:,3) + y(:,4))
-legends{end+1} = sprintf('K_i(2) = %.3f', ki2);
+legends{end+1} = sprintf('Km4 = %.3f', km4);
 end
 legend(legends);
 xlabel('time (h)'); ylabel('Glucose + Cellobiose (g/L)');
+
+
 %%
 % for only ki2=  .08
 %Sam = y(:,1); Scr = y(:,2); G2 = y(:,3); G = y(:,4);
